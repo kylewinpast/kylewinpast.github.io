@@ -1,44 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Geonung Weon - Portfolio</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <header>
+  <header class="header">
     <h1>Geonung Weon</h1>
-    <p>Statistics · Data Analysis · Tableau · SQL</p>
+    <p>Statistics • Data Analysis • Tableau • SQL</p>
   </header>
-  
-  <section>
-    <h2>About Me</h2>
-    <p>B.S. in Statistics, specialized in Data Analysis and Visualization. Passionate about turning data into actionable insights.</p>
-  </section>
-  
-  <section>
-    <h2>Skills</h2>
-    <ul>
-      <li>Tableau Desktop Specialist</li>
-      <li>SQL (PostgreSQL, SQL Server)</li>
-      <li>Python (Pandas, Matplotlib)</li>
-      <li>Statistical Analysis</li>
-    </ul>
-  </section>
-  
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="#">Sales KPI Dashboard (Tableau)</a></li>
-      <li><a href="#">SQL Data Cleaning Project</a></li>
-      <li><a href="#">Statistical Case Study: Hypothesis Testing</a></li>
-    </ul>
-  </section>
-  
-  <section>
-    <h2>Contact</h2>
-    <p>Email: geonung1995@gmail.com</p>
-    <p>LinkedIn: <a href="#">linkedin.com/in/yourname</a></p>
-    <p>GitHub: <a href="#">github.com/kylewinpast</a></p>
-  </section>
+
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="container">
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>B.S. in Statistics (Data Analysis & Visualization). I build clear dashboards and data stories that drive decisions.</p>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <p>
+        <span class="badge">Tableau Desktop Specialist</span>
+        <span class="badge">SQL (PostgreSQL, SQL Server)</span>
+        <span class="badge">Python (Pandas, Matplotlib)</span>
+        <span class="badge">Statistical Analysis</span>
+      </p>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="project-list">
+        <article class="card">
+          <h3><a href="projects/sales-kpi.html">Sales KPI Dashboard</a></h3>
+          <p>Monthly revenue, margin, and cohort retention dashboard with drill‑downs.</p>
+        </article>
+        <article class="card">
+          <h3><a href="projects/sql-cleaning.html">SQL Data Cleaning</a></h3>
+          <p>Standardized messy customer data and built QA checks with window functions.</p>
+        </article>
+        <article class="card">
+          <h3><a href="projects/stats-case.html">Statistical Case Study</a></h3>
+          <p>AB test: hypothesis testing, power, and confidence intervals with Python.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:geonung1995@gmail.com">geonung1995@gmail.com</a></p>
+      <p>LinkedIn: <a href="#" target="_blank" rel="noopener">linkedin.com/in/yourname</a></p>
+      <p>GitHub: <a href="https://github.com/kylewinpast" target="_blank" rel="noopener">github.com/kylewinpast</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> Geonung Weon
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
