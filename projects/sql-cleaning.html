@@ -1,8 +1,227 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SQL Data Cleaning</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><main class="container section">
-<h2>SQL Data Cleaning</h2>
-<p><b>Goal.</b> Clean and standardize customer records from multiple sources.</p>
-<p><b>Tools.</b> PostgreSQL • CTE • Window functions</p>
-<p><b>Highlights.</b> Deduping logic, outlier checks, referential integrity QA.</p>
-<p><a href="../index.html">← Back</a> • <a href="#" target="_blank" rel="noopener">GitHub Repo</a></p>
-</main></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SQL Data Cleaning – Marketing Campaign</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <main class="container section">
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <h1>SQL Data Cleaning – Marketing Campaign</h1>
+    <p class="subtitle">
+      PostgreSQL • Data Cleaning • Customer Segmentation • Marketing Analytics
+    </p>
+
+    <section class="section">
+      <h2>Project Overview</h2>
+      <p>
+        This project uses pure SQL in PostgreSQL to clean a 2,240-row marketing
+        dataset and turn it into a reliable source for customer and campaign analysis.
+        I focused on:
+      </p>
+      <ul>
+        <li>Cleaning key fields (birth year, income, dates)</li>
+        <li>Engineering analytical features (age, total_spent, total_purchases, segments)</li>
+        <li>Building age-based customer segments</li>
+        <li>Analyzing spending behavior, campaign response, and product preferences</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Data & Tools</h2>
+      <ul>
+        <li><strong>Database:</strong> PostgreSQL (local)</li>
+        <li><strong>Client:</strong> DBeaver</li>
+        <li><strong>Main table:</strong> <code>marketing_campaign_clean</code></li>
+        <li><strong>Rows:</strong> 2,240 customers</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>1. Data Cleaning</h2>
+
+      <h3>Birth year outliers</h3>
+      <p>
+        Some customers had unrealistic birth years. I kept only reasonable values
+        and set the rest to <code>NULL</code>.
+      </p>
+      <pre><code class="language-sql">-- Check distribution
+SELECT MIN(year_birth) AS min_year,
+       MAX(year_birth) AS max_year,
+       COUNT(*)        AS total_rows
+FROM marketing_campaign_clean;
+</code></pre>
+
+      <h3>Income outliers</h3>
+      <p>
+        A few customers had extreme income values such as <code>666,666</code>.
+        These were treated as outliers and set to <code>NULL</code>.
+      </p>
+      <pre><code class="language-sql">SELECT
+  COUNT(*)                 AS total_rows,
+  COUNT(income)            AS non_null_income,
+  COUNT(*) - COUNT(income) AS null_income,
+  MIN(income)              AS min_income,
+  MAX(income)              AS max_income
+FROM marketing_campaign_clean;
+</code></pre>
+
+      <h3>Date parsing</h3>
+      <p>
+        The original customer date (<code>dt_customer</code>) was stored as text
+        in <code>DD-MM-YYYY</code> format. I created a proper
+        <code>DATE</code> column for time-based analysis.
+      </p>
+      <pre><code class="language-sql">ALTER TABLE marketing_campaign_clean
+ADD COLUMN dt_customer_date DATE;
+
+UPDATE marketing_campaign_clean
+SET dt_customer_date = TO_DATE(dt_customer, 'DD-MM-YYYY');
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>2. Feature Engineering</h2>
+
+      <h3>Age & age groups</h3>
+      <p>
+        I calculated customer age using 2014 as the reference year
+        (the period of the campaigns), and then binned ages into segments.
+      </p>
+      <pre><code class="language-sql">-- Age
+ALTER TABLE marketing_campaign_clean
+ADD COLUMN age INT;
+
+UPDATE marketing_campaign_clean
+SET age = 2014 - year_birth;
+
+-- Age groups
+ALTER TABLE marketing_campaign_clean
+ADD COLUMN age_group TEXT;
+
+UPDATE marketing_campaign_clean
+SET age_group = CASE
+  WHEN age BETWEEN 18 AND 29 THEN '18-29'
+  WHEN age BETWEEN 30 AND 39 THEN '30-39'
+  WHEN age BETWEEN 40 AND 49 THEN '40-49'
+  WHEN age BETWEEN 50 AND 59 THEN '50-59'
+  WHEN age &gt;= 60          THEN '60+'
+  ELSE NULL
+END;
+</code></pre>
+
+      <h3>Total spending</h3>
+      <p>
+        I combined all product spending columns into a single
+        <code>total_spent</code> feature.
+      </p>
+      <pre><code class="language-sql">ALTER TABLE marketing_campaign_clean
+ADD COLUMN total_spent INT;
+
+UPDATE marketing_campaign_clean
+SET total_spent =
+      mntwines
+    + mntfruits
+    + mntmeatproducts
+    + mntfishproducts
+    + mntsweetproducts
+    + mntgoldprods;
+</code></pre>
+
+      <h3>Total purchases</h3>
+      <p>
+        I also created a <code>total_purchases</code> feature by summing all
+        purchase channels.
+      </p>
+      <pre><code class="language-sql">ALTER TABLE marketing_campaign_clean
+ADD COLUMN total_purchases INT;
+
+UPDATE marketing_campaign_clean
+SET total_purchases =
+      numdealspurchases
+    + numwebpurchases
+    + numcatalogpurchases
+    + numstorepurchases;
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>3. Customer & Campaign Insights</h2>
+
+      <h3>Age group distribution</h3>
+      <pre><code class="language-sql">SELECT age_group, COUNT(*) AS cnt
+FROM marketing_campaign_clean
+GROUP BY age_group
+ORDER BY cnt DESC;
+</code></pre>
+
+      <h3>Spending & behavior by age group</h3>
+      <pre><code class="language-sql">-- Average spending and purchases
+SELECT age_group,
+       AVG(total_spent)      AS avg_spent,
+       AVG(total_purchases)  AS avg_purchases
+FROM marketing_campaign_clean
+GROUP BY age_group
+ORDER BY avg_spent DESC;
+</code></pre>
+
+      <h3>Campaign response rate</h3>
+      <pre><code class="language-sql">SELECT age_group,
+       AVG(response)::NUMERIC(10,4) AS response_rate
+FROM marketing_campaign_clean
+GROUP BY age_group
+ORDER BY response_rate DESC;
+</code></pre>
+
+      <h3>Campaign-driven revenue</h3>
+      <p>
+        To measure how much revenue campaigns generated by segment, I multiplied
+        <code>total_spent</code> by <code>response</code> and summed it.
+      </p>
+      <pre><code class="language-sql">SELECT age_group,
+       SUM(total_spent * response) AS campaign_revenue
+FROM marketing_campaign_clean
+GROUP BY age_group
+ORDER BY campaign_revenue DESC;
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>4. Key Takeaways</h2>
+      <ul>
+        <li>
+          <strong>40–49</strong> is the core revenue segment, generating the
+          highest total revenue and campaign revenue.
+        </li>
+        <li>
+          <strong>60+</strong> customers show the highest average spending and
+          purchase frequency, acting as a high-value VIP segment.
+        </li>
+        <li>
+          <strong>18–29</strong> customers have the highest campaign response
+          rate despite being a smaller group, making them an efficient but
+          niche target.
+        </li>
+        <li>
+          Age segmentation helps balance between volume segments
+          (40–59) and high-efficiency segments (18–29, 60+)
+          when allocating marketing budget.
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>What this project shows</h2>
+      <ul>
+        <li>Comfort working directly in SQL without Excel or BI tools</li>
+        <li>Ability to clean and structure messy real-world data</li>
+        <li>Feature engineering for analytics (age, segments, totals)</li>
+        <li>Turning raw tables into business insights for marketing teams</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
