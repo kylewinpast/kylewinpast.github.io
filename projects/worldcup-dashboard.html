@@ -2,108 +2,147 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>World Cup Insights Dashboard (1930–2014)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World Cup Insights (1930–2014)</title>
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
 <body>
-  <h1>World Cup Insights (1930–2014)</h1>
-  <h3>Project Overview</h3>
-<p>
-  This dashboard analyzes <strong>all FIFA World Cup matches from 1930 to 2014</strong>.
-  The project focuses on four core questions:
-</p>
-<ul>
-  <li>How did global participation expand over time?</li>
-  <li>How many matches were played in each World Cup?</li>
-  <li>How did stadium attendance change across tournaments?</li>
-  <li>Which countries scored the most goals overall?</li>
-</ul>
+  <main class="container section">
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
 
-<h3>Dataset</h3>
-<p>
-  Data was sourced from publicly available historical World Cup match results.
-  After cleaning the dataset in Excel (removing nulls, standardizing country names,
-  fixing host country labels), the final dataset was imported into Tableau.
-</p>
+    <h1>World Cup Insights (1930–2014)</h1>
+    <p class="subtitle">
+      A data-driven exploration of World Cup participation, matches, attendance,
+      and national performance from 1930 to 2014.
+    </p>
 
-<h3>Key Insights</h3>
-<ul>
-  <li><strong>Participation growth:</strong> The number of participating nations expanded significantly as new regions joined.</li>
-  <li><strong>Match volume increased:</strong> New tournament formats increased total matches per World Cup.</li>
-  <li><strong>Attendance trends:</strong> Stadium capacity and global interest drove steady attendance growth.</li>
-  <li><strong>Top scoring nations:</strong> A small group of countries consistently dominated offensive performance.</li>
-</ul>
+    <!-- ===== Project Overview ===== -->
+    <section class="section">
+      <h2>Project Overview</h2>
+      <p>
+        This dashboard analyzes <strong>all FIFA World Cup matches from 1930 to 2014</strong>.
+        The project focuses on four core questions:
+      </p>
+      <ul>
+        <li>How did global participation expand over time?</li>
+        <li>How many matches were played in each World Cup?</li>
+        <li>How did stadium attendance change across tournaments?</li>
+        <li>Which countries scored the most goals overall?</li>
+      </ul>
+    </section>
 
-  <h3>Deeper Insights</h3>
-<p>
-Looking across all four views together, the dashboard highlights how the World Cup
-moved from a mostly European–South American tournament to a truly global event.
-Participation from Asia and Africa increases sharply after the 1970s, while the
-core European and South American nations continue to appear almost every cycle.
-</p>
-<p>
-On the performance side, a small group of teams such as Brazil, Germany, and
-Argentina consistently reach the later rounds and therefore accumulate the most
-goals over time. Other countries appear less frequently or exit early, which
-keeps their total goals much lower even if they have strong individual squads.
-</p>
+    <!-- ===== Dataset ===== -->
+    <section class="section">
+      <h2>Dataset</h2>
+      <p>
+        Data was sourced from publicly available historical World Cup match results.
+        After cleaning the dataset in Excel (removing nulls, standardizing country names,
+        fixing host country labels), the final dataset was imported into Tableau.
+      </p>
+    </section>
 
-<h3>Looking Ahead to Future World Cups</h3>
-<p>
-The historical trends in participation and goals also hint at the future. As
-more nations from Asia and Africa qualify regularly and invest in player
-development, the gap between traditional powers and emerging teams continues to
-shrink. Recent tournaments already show stronger runs from countries like
-Croatia, Morocco, Japan, and South Korea, suggesting that future World Cups may
-see more upsets and a wider set of serious contenders.
-</p>
+    <!-- ===== Key Insights ===== -->
+    <section class="section">
+      <h2>Key Insights</h2>
+      <ul>
+        <li>
+          <strong>Participation growth:</strong>
+          The number of participating nations expanded significantly as new regions joined.
+        </li>
+        <li>
+          <strong>Match volume increased:</strong>
+          New tournament formats increased total matches per World Cup.
+        </li>
+        <li>
+          <strong>Attendance trends:</strong>
+          Stadium capacity and global interest drove steady attendance growth.
+        </li>
+        <li>
+          <strong>Top scoring nations:</strong>
+          A small group of countries consistently dominated offensive performance.
+        </li>
+      </ul>
+    </section>
 
+    <!-- ===== Deeper Insights ===== -->
+    <section class="section">
+      <h2>Deeper Insights</h2>
+      <p>
+        Looking across all four views together, the dashboard highlights how the World Cup
+        moved from a mostly European–South American tournament to a truly global event.
+        Participation from Asia and Africa increases sharply after the 1970s, while the
+        core European and South American nations continue to appear almost every cycle.
+      </p>
+      <p>
+        On the performance side, a small group of teams such as Brazil, Germany, and
+        Argentina consistently reach the later rounds and therefore accumulate the most
+        goals over time. Other countries participate less frequently or exit early,
+        keeping their total goals much lower even if they have strong squads.
+      </p>
+    </section>
 
-  <p>
-    Interactive Tableau dashboard exploring World Cup participation, matches,
-    attendance, and top-scoring nations from 1930 to 2014.
-  </p>
+    <!-- ===== Future Outlook ===== -->
+    <section class="section">
+      <h2>Looking Ahead to Future World Cups</h2>
+      <p>
+        Historical trends suggest that as more nations from Asia and Africa qualify consistently
+        and invest in player development, the gap between traditional powers and emerging teams
+        continues to shrink. Recent tournaments already show stronger runs from countries like
+        Croatia, Morocco, Japan, and South Korea — indicating that future World Cups may see
+        more upsets and a wider set of legitimate contenders.
+      </p>
+    </section>
 
-  <!-- ====== 여기 안에 방금 형이 복사한 Tableau 코드 붙여넣기 ====== -->
-  <div class='tableauPlaceholder' id='viz1764279968526' style='position: relative'>
-    <noscript>
-      <a href='#'><img alt='Dashboard 1 '
-        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HR&#47;HR8CSQN4C&#47;1_rss.png'
-        style='border: none' />
-      </a>
-    </noscript>
-    <object class='tableauViz'  style='display:none;'>
-      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-      <param name='embed_code_version' value='3' />
-      <param name='path' value='shared&#47;HR8CSQN4C' />
-      <param name='toolbar' value='yes' />
-      <param name='static_image'
-             value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HR&#47;HR8CSQN4C&#47;1.png' />
-      <param name='animate_transition' value='yes' />
-      <param name='display_static_image' value='yes' />
-      <param name='display_spinner' value='yes' />
-      <param name='display_overlay' value='yes' />
-      <param name='display_count' value='yes' />
-      <param name='language' value='en-US' />
-      <param name='filter' value='publish=yes' />
-    </object>
-  </div>
-  <script type='text/javascript'>
-    var divElement = document.getElementById('viz1764279968526');
-    var vizElement = divElement.getElementsByTagName('object')[0];
-    if ( divElement.offsetWidth > 800 ) {
-      vizElement.style.width='1000px';vizElement.style.height='827px';
-    } else if ( divElement.offsetWidth > 500 ) {
-      vizElement.style.width='1000px';vizElement.style.height='827px';
-    } else {
-      vizElement.style.width='100%';vizElement.style.height='1277px';
-    }
-    var scriptElement = document.createElement('script');
-    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-    vizElement.parentNode.insertBefore(scriptElement, vizElement);
-  </script>
-  <!-- =========================================================== -->
+    <!-- ===== Dashboard Embed ===== -->
+    <section class="section">
+      <h2>Dashboard</h2>
+      <p>
+        Interactive Tableau dashboard exploring World Cup participation, matches,
+        attendance, and top-scoring nations from 1930 to 2014.
+      </p>
 
-  <p><a href="../index.html">⬅ Back to portfolio</a></p>
+      <div class="dashboard-embed">
+        <div class='tableauPlaceholder' id='viz1764279968526' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt='Dashboard 1'
+                   src='https://public.tableau.com/static/images/HR/HR8CSQN4C/1_rss.png'
+                   style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='path' value='shared&#47;HR8CSQN4C' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image'
+                   value='https://public.tableau.com/static/images/HR/HR8CSQN4C/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+            <param name='filter' value='publish=yes' />
+          </object>
+        </div>
+      </div>
+
+      <script type='text/javascript'>
+        var divElement = document.getElementById('viz1764279968526');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        if (divElement.offsetWidth > 800) {
+          vizElement.style.width = '1000px'; vizElement.style.height = '827px';
+        } else if (divElement.offsetWidth > 500) {
+          vizElement.style.width = '1000px'; vizElement.style.height = '827px';
+        } else {
+          vizElement.style.width = '100%'; vizElement.style.height = '1277px';
+        }
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      </script>
+    </section>
+  </main>
 </body>
 </html>
